@@ -1,4 +1,6 @@
-import { useLanguage } from '../context/LanguageContext';
+'use client';
+
+import { useLanguage } from '../../../src/context/LanguageContext';
 import { Gavel, Scale, Award, ShieldCheck, Heart, Users } from 'lucide-react';
 
 export default function About() {

@@ -5,35 +5,30 @@ export default function TopBar() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="bg-slate-900 text-slate-300 text-xs py-2 px-6 flex flex-wrap items-center justify-between gap-4 border-b border-white/5">
+    <div className="bg-primary-900 text-slate-400 text-[10px] sm:text-xs py-3 px-6 flex flex-wrap items-center justify-between gap-4 border-b border-white/5 font-black uppercase tracking-[0.2em]">
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
-          <MapPin size={14} className="text-blue-400" />
-          <span>123 Business St, Dubai, UAE</span>
+          <MapPin size={12} className="text-accent" />
+          <span className="hidden sm:inline">Riyadh, Saudi Arabia</span>
         </div>
         <div className="flex items-center gap-2">
-          <Phone size={14} className="text-blue-400" />
-          <span>+971 50 123 4567</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Mail size={14} className="text-blue-400" />
-          <span>contact@samianis.com</span>
+          <Phone size={12} className="text-accent" />
+          <span>+966 11 123 4567</span>
         </div>
       </div>
 
       <div className="flex items-center gap-6">
-        <div className="flex items-center gap-3 border-r border-white/10 pr-6 mr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6 rtl:mr-0 rtl:ml-6">
-          <a href="#" className="hover:text-blue-400 transition-colors"><Facebook size={14} /></a>
-          <a href="#" className="hover:text-blue-400 transition-colors"><Instagram size={14} /></a>
-          <a href="#" className="hover:text-blue-400 transition-colors"><Linkedin size={14} /></a>
-          <a href="#" className="hover:text-blue-400 transition-colors"><Twitter size={14} /></a>
+        <div className="hidden md:flex items-center gap-4">
+          <a href="#" className="hover:text-white transition-colors"><Facebook size={14} /></a>
+          <a href="#" className="hover:text-white transition-colors"><Instagram size={14} /></a>
+          <a href="#" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
         </div>
         
         <button 
           onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-          className="flex items-center gap-2 hover:text-white transition-colors uppercase font-medium tracking-wider"
+          className="flex items-center gap-2 text-white hover:text-accent transition-colors py-1 px-3 border border-white/10 rounded-lg"
         >
-          <Globe size={14} className="text-blue-400" />
+          <Globe size={12} />
           {language === 'en' ? 'العربية' : 'English'}
         </button>
       </div>

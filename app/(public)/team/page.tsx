@@ -1,4 +1,6 @@
-import { useLanguage } from '../context/LanguageContext';
+'use client';
+
+import { useLanguage } from '../../../src/context/LanguageContext';
 import { Linkedin, Twitter, Scale } from 'lucide-react';
 
 export default function Team() {

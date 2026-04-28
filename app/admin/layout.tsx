@@ -1,5 +1,8 @@
-import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+'use client';
+
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
+import { useAuth } from '../../src/context/AuthContext';
 import { 
   LayoutDashboard, 
   Image as ImageIcon, 
@@ -13,18 +16,26 @@ import {
   Bell
 } from 'lucide-react';
 import { useEffect } from 'react';
-import { cn } from '../../lib/utils';
+import { cn } from '../../src/lib/utils';
+import Logo from '../../src/components/ui/Logo';
 
-export default function AdminLayout() {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!isAuthenticated) navigate('/admin/login');
-  }, [isAuthenticated, navigate]);
+    if (!isAuthenticated && pathname !== '/admin/login') {
+      router.push('/admin/login');
+    }
+  }, [isAuthenticated, router, pathname]);
 
-  if (!isAuthenticated) return null;
+  if (!isAuthenticated && pathname !== '/admin/login') return null;
+
+  // We don't want the sidebar/header on the login page
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
 
   const menuItems = [
     { name: 'Overview', path: '/admin/dashboard', icon: LayoutDashboard },
@@ -41,20 +52,19 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-72 bg-primary-900 text-slate-400 flex flex-col shrink-0 border-r border-white/5 shadow-2xl">
         <div className="p-8 pb-10">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-serif tracking-tight text-white">
-              SAMI <span className="text-accent italic font-black">ADMIN</span>
-            </span>
+          <Link href="/" className="flex flex-col items-start gap-2">
+            <Logo variant="light" className="items-start" showSubtitle={false} />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mt-2">Admin Dashboard</span>
           </Link>
         </div>
 
         <nav className="flex-grow px-4 space-y-1 overflow-y-auto">
           {menuItems.map((item) => {
-            const isActive = location.pathname === item.path;
+            const isActive = pathname === item.path;
             return (
               <Link
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-[11px] font-black uppercase tracking-[0.1em]",
                   isActive 
@@ -85,7 +95,7 @@ export default function AdminLayout() {
       <main className="flex-grow flex flex-col min-w-0 overflow-hidden">
         <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-10 shrink-0">
           <h2 className="text-lg font-serif italic font-bold text-primary-900 border-l-4 border-accent pl-4">
-            {menuItems.find(i => i.path === location.pathname)?.name || 'Admin Management'}
+            {menuItems.find(i => i.path === pathname)?.name || 'Admin Management'}
           </h2>
           <div className="flex items-center gap-6">
             <button className="relative w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-50 hover:text-accent transition-all">
@@ -105,7 +115,7 @@ export default function AdminLayout() {
         </header>
 
         <div className="flex-grow overflow-y-auto p-10">
-          <Outlet />
+          {children}
         </div>
       </main>
     </div>

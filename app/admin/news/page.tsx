@@ -1,14 +1,16 @@
+'use client';
+
 import { useState } from 'react';
 import { Plus, Search, Edit2, Trash2, Image as ImageIcon, Eye } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../src/lib/utils';
 
 export default function ManageNews() {
   const [searchTerm, setSearchTerm] = useState('');
   
   const [articles, setArticles] = useState([
-    { id: '1', title: 'Navigating Market Volatility in 2026', category: 'Finance', status: 'Published', date: '2026-04-20' },
-    { id: '2', title: 'The Future of AI in Strategic Management', category: 'Technology', status: 'Published', date: '2026-04-14' },
-    { id: '3', title: 'Building Scalable Operational Models', category: 'Operations', status: 'Draft', date: '2026-04-05' },
+    { id: '1', title: 'Navigating Regional Labor Laws', category: 'Labor Law', status: 'Published', date: '2026-04-20' },
+    { id: '2', title: 'Intellectual Property in AI Era', category: 'IP Rights', status: 'Published', date: '2026-04-14' },
+    { id: '3', title: 'Strategic Corporate Transparency', category: 'Corporate', status: 'Draft', date: '2026-04-05' },
   ]);
 
   const handleDelete = (id: string) => {
@@ -18,7 +20,7 @@ export default function ManageNews() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="relative flex-grow max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -27,13 +29,13 @@ export default function ManageNews() {
             placeholder="Search articles..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-blue-500 shadow-sm transition-all"
+            className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-accent shadow-sm transition-all"
           />
         </div>
         
-        <button className="bg-blue-600 text-white font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+        <button className="bg-accent text-white font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:bg-amber-600 transition-all shadow-lg shadow-accent/20">
           <Plus size={20} />
-          Create New Article
+          New Legal Insight
         </button>
       </div>
 
@@ -53,10 +55,10 @@ export default function ManageNews() {
               <tr key={article.id} className="hover:bg-slate-50/50 transition-colors group">
                 <td className="px-8 py-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-accent/10 group-hover:text-accent transition-colors">
                       <ImageIcon size={20} />
                     </div>
-                    <span className="font-bold text-slate-900 line-clamp-1">{article.title}</span>
+                    <span className="font-bold text-primary-900 font-serif italic line-clamp-1">{article.title}</span>
                   </div>
                 </td>
                 <td className="px-8 py-6">
@@ -75,10 +77,10 @@ export default function ManageNews() {
                 </td>
                 <td className="px-8 py-6">
                   <div className="flex items-center justify-end gap-2 rtl:justify-start">
-                    <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all shadow-sm shadow-transparent hover:shadow-slate-200">
+                    <button className="p-2 text-slate-400 hover:text-accent hover:bg-white rounded-lg transition-all shadow-sm shadow-transparent hover:shadow-slate-200">
                       <Eye size={18} />
                     </button>
-                    <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all shadow-sm shadow-transparent hover:shadow-slate-200">
+                    <button className="p-2 text-slate-400 hover:text-accent hover:bg-white rounded-lg transition-all shadow-sm shadow-transparent hover:shadow-slate-200">
                       <Edit2 size={18} />
                     </button>
                     <button 
@@ -95,10 +97,10 @@ export default function ManageNews() {
         </table>
         
         <div className="p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Showing 3 of 24 articles</p>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Showing {articles.length} insights</p>
           <div className="flex gap-2">
             <button className="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-400 disabled:opacity-50" disabled>Previous</button>
-            <button className="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-lg text-xs font-bold">1</button>
+            <button className="px-4 py-2 border border-accent bg-accent text-white rounded-lg text-xs font-bold">1</button>
             <button className="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-white">Next</button>
           </div>
         </div>

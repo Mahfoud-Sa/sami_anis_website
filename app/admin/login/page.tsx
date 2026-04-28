@@ -1,6 +1,8 @@
+'use client';
+
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../../src/context/AuthContext';
 import { Lock, LayoutDashboard, Loader2 } from 'lucide-react';
 
 export default function AdminLogin() {
@@ -8,7 +10,7 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function AdminLogin() {
     
     const success = await login(password);
     if (success) {
-      navigate('/admin/dashboard');
+      router.push('/admin/dashboard');
     } else {
       setError('Invalid password. Try "admin123"');
     }
@@ -45,7 +47,7 @@ export default function AdminLogin() {
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border-slate-800 border rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-slate-950 border-slate-800 border rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-blue-500 transition-all font-sans"
                   placeholder="••••••••"
                   required
                 />

@@ -1,6 +1,8 @@
+'use client';
+
 import { useState, FormEvent } from 'react';
 import { Plus, Search, Edit2, Trash2, Briefcase, X, Save } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../src/lib/utils';
 
 interface Service {
   id: string;
@@ -49,7 +51,7 @@ export default function ManageServices() {
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="relative flex-grow max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -58,16 +60,16 @@ export default function ManageServices() {
             placeholder="Search services..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-blue-500 shadow-sm transition-all"
+            className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-accent shadow-sm transition-all"
           />
         </div>
         
         <button 
           onClick={() => openModal()}
-          className="bg-blue-600 text-white font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
+          className="bg-accent text-white font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:bg-amber-600 transition-all shadow-lg shadow-accent/20"
         >
           <Plus size={20} />
-          Add New Service
+          Add New Practice Area
         </button>
       </div>
 
@@ -75,13 +77,13 @@ export default function ManageServices() {
         {filteredServices.map((service) => (
           <div key={service.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-md transition-all group">
             <div className="flex items-start justify-between mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
+              <div className="w-14 h-14 rounded-2xl bg-accent/5 flex items-center justify-center text-accent">
                 <Briefcase size={24} />
               </div>
               <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={() => openModal(service)}
-                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-all"
+                  className="p-2 text-slate-400 hover:text-accent hover:bg-slate-50 rounded-lg transition-all"
                 >
                   <Edit2 size={16} />
                 </button>
@@ -93,8 +95,8 @@ export default function ManageServices() {
                 </button>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-            <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">{service.description}</p>
+            <h3 className="text-xl font-bold text-primary-900 mb-2 font-serif italic">{service.title}</h3>
+            <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 italic">{service.description}</p>
           </div>
         ))}
       </div>
@@ -104,8 +106,8 @@ export default function ManageServices() {
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-slate-950/40 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-8 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-slate-900">
-                {currentService?.id ? 'Edit Service' : 'Add New Service'}
+              <h3 className="text-xl font-bold text-primary-900 font-serif italic">
+                {currentService?.id ? 'Edit Practice Area' : 'Add New Practice Area'}
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -122,8 +124,8 @@ export default function ManageServices() {
                   required
                   value={currentService?.title || ''}
                   onChange={(e) => setCurrentService(prev => prev ? { ...prev, title: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all font-medium"
-                  placeholder="e.g. Strategic Planning"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-accent transition-all font-medium"
+                  placeholder="e.g. Corporate Law"
                 />
               </div>
               <div>
@@ -133,24 +135,24 @@ export default function ManageServices() {
                   rows={4}
                   value={currentService?.description || ''}
                   onChange={(e) => setCurrentService(prev => prev ? { ...prev, description: e.target.value } : null)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all font-medium resize-none"
-                  placeholder="Describe the service..."
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-accent transition-all font-medium resize-none"
+                  placeholder="Describe the practice area..."
                 ></textarea>
               </div>
               <div className="flex gap-4 pt-4">
                 <button 
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 px-6 py-4 rounded-xl border border-slate-200 font-bold text-slate-600 hover:bg-slate-50 transition-all"
+                  className="flex-1 px-6 py-4 rounded-xl border border-slate-200 font-bold text-slate-600 hover:bg-slate-50 transition-all font-sans uppercase tracking-widest text-[10px]"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  className="flex-1 px-6 py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
+                  className="flex-1 px-6 py-4 rounded-xl bg-primary-900 text-white font-bold hover:bg-black transition-all flex items-center justify-center gap-2 font-sans uppercase tracking-widest text-[10px]"
                 >
                   <Save size={18} />
-                  Save Service
+                  Save Changes
                 </button>
               </div>
             </form>

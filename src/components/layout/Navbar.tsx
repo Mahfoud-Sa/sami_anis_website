@@ -1,14 +1,16 @@
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '../../context/LanguageContext';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '../../lib/utils';
+import Logo from '../ui/Logo';
 
 export default function Navbar() {
   const { t, language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -31,10 +33,8 @@ export default function Navbar() {
       isScrolled ? "bg-white shadow-md py-3" : "bg-white py-5"
     )}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-serif tracking-tight text-primary-900">
-            SAMI <span className="text-accent italic font-black">ANIS</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2">
+          <Logo variant="gold" showSubtitle={!isScrolled} className="scale-75 md:scale-100 origin-left" />
         </Link>
 
         {/* Desktop Menu */}
@@ -42,17 +42,17 @@ export default function Navbar() {
           {menuItems.map((item) => (
             <Link
               key={item.path}
-              to={item.path}
+              href={item.path}
               className={cn(
                 "text-xs font-black uppercase tracking-[0.2em] transition-colors hover:text-accent",
-                location.pathname === item.path ? "text-accent" : "text-slate-500"
+                pathname === item.path ? "text-accent" : "text-slate-500"
               )}
             >
               {item.name}
             </Link>
           ))}
           <Link
-            to="/contact"
+            href="/contact"
             className="bg-primary-900 text-white px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-primary-900/10"
           >
             {t('nav.consultancy')}
@@ -71,18 +71,18 @@ export default function Navbar() {
           {menuItems.map((item) => (
             <Link
               key={item.path}
-              to={item.path}
+              href={item.path}
               onClick={() => setIsOpen(false)}
               className={cn(
                 "text-base font-bold py-2 uppercase tracking-widest transition-colors",
-                location.pathname === item.path ? "text-accent" : "text-slate-600"
+                pathname === item.path ? "text-accent" : "text-slate-600"
               )}
             >
               {item.name}
             </Link>
           ))}
           <Link
-            to="/contact"
+            href="/contact"
             onClick={() => setIsOpen(false)}
             className="bg-primary-900 text-white px-6 py-4 rounded-xl text-center font-black uppercase tracking-widest mt-4 shadow-xl"
           >

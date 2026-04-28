@@ -1,6 +1,7 @@
 import { useLanguage } from '../../context/LanguageContext';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter, Scale } from 'lucide-react';
+import Logo from '../ui/Logo';
 
 export default function Footer() {
   const { t, language } = useLanguage();
@@ -9,10 +10,8 @@ export default function Footer() {
     <footer className="bg-primary-900 text-slate-400 py-20 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
         <div className="col-span-1 md:col-span-1">
-          <Link to="/" className="inline-block mb-8">
-            <span className="text-3xl font-serif tracking-tight text-white">
-              SAMI <span className="text-accent italic font-black">ANIS</span>
-            </span>
+          <Link href="/" className="inline-block mb-10">
+            <Logo variant="light" className="items-start" />
           </Link>
           <p className="text-base leading-relaxed mb-8 font-serif italic">
             {language === 'ar' 
@@ -30,20 +29,20 @@ export default function Footer() {
         <div>
            <h4 className="text-white font-serif italic font-bold mb-8 text-xl border-b border-white/10 pb-4">{t('nav.services')}</h4>
            <ul className="space-y-4 text-sm font-medium uppercase tracking-widest">
-             <li><Link to="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'قانون الشركات' : 'Corporate Law'}</Link></li>
-             <li><Link to="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'التقاضي والنزاعات' : 'Litigation & Disputes'}</Link></li>
-             <li><Link to="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'قانون الأسرة' : 'Family Law'}</Link></li>
-             <li><Link to="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'الملكية الفكرية' : 'Intellectual Property'}</Link></li>
+             <li><Link href="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'قانون الشركات' : 'Corporate Law'}</Link></li>
+             <li><Link href="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'التقاضي والنزاعات' : 'Litigation & Disputes'}</Link></li>
+             <li><Link href="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'قانون الأسرة' : 'Family Law'}</Link></li>
+             <li><Link href="/services" className="hover:text-accent transition-colors">{language === 'ar' ? 'الملكية الفكرية' : 'Intellectual Property'}</Link></li>
            </ul>
         </div>
 
         <div>
            <h4 className="text-white font-serif italic font-bold mb-8 text-xl border-b border-white/10 pb-4">{language === 'ar' ? 'المكتب' : 'The Firm'}</h4>
            <ul className="space-y-4 text-sm font-medium uppercase tracking-widest">
-             <li><Link to="/about" className="hover:text-accent transition-colors">{t('nav.about')}</Link></li>
-             <li><Link to="/news" className="hover:text-accent transition-colors">{t('nav.news')}</Link></li>
-             <li><Link to="/team" className="hover:text-accent transition-colors">{t('nav.team')}</Link></li>
-             <li><Link to="/contact" className="hover:text-accent transition-colors">{t('nav.contact')}</Link></li>
+             <li><Link href="/about" className="hover:text-accent transition-colors">{t('nav.about')}</Link></li>
+             <li><Link href="/news" className="hover:text-accent transition-colors">{t('nav.news')}</Link></li>
+             <li><Link href="/team" className="hover:text-accent transition-colors">{t('nav.team')}</Link></li>
+             <li><Link href="/contact" className="hover:text-accent transition-colors">{t('nav.contact')}</Link></li>
            </ul>
         </div>
 
@@ -72,6 +71,7 @@ export default function Footer() {
            <p>© {new Date().getFullYear()} Sami Anis Law Firm. {t('footer.rights')}.</p>
         </div>
         <div className="flex items-center gap-8 text-slate-500">
+          <Link href="/admin" className="hover:text-accent transition-colors">{t('admin.login')}</Link>
           <a href="#" className="hover:text-accent transition-colors">{language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}</a>
           <a href="#" className="hover:text-accent transition-colors">{language === 'ar' ? 'شروط الخدمة' : 'Terms of Service'}</a>
         </div>

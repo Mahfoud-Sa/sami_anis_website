@@ -1,6 +1,8 @@
+'use client';
+
 import { motion } from 'motion/react';
-import { useLanguage } from '../context/LanguageContext';
-import { Link } from 'react-router-dom';
+import { useLanguage } from '../../src/context/LanguageContext';
+import Link from 'next/link';
 import { Gavel, Scale, ShieldCheck, BookOpen, ArrowRight, Play } from 'lucide-react';
 
 export default function Home() {
@@ -40,7 +42,7 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap items-center gap-6">
-              <Link to="/contact" className="bg-accent text-white px-10 py-5 rounded-full font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-2xl shadow-accent/40 hover:scale-105">
+              <Link href="/contact" className="bg-accent text-white px-10 py-5 rounded-full font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-2xl shadow-accent/40 hover:scale-105">
                 {t('home.cta.button')}
               </Link>
               
@@ -97,7 +99,7 @@ export default function Home() {
             <p className="text-lg text-slate-600 mb-10 leading-relaxed italic">
               {t('about.description')}
             </p>
-            <Link to="/about" className="inline-flex items-center gap-3 text-accent font-black uppercase tracking-[0.2em] hover:gap-5 transition-all text-sm">
+            <Link href="/about" className="inline-flex items-center gap-3 text-accent font-black uppercase tracking-[0.2em] hover:gap-5 transition-all text-sm">
               {language === 'ar' ? 'اكتشف المزيد عن مكتبنا' : 'Discover Our Legacy'} <ArrowRight size={20} />
             </Link>
           </div>
@@ -124,7 +126,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-primary-900 mb-4 font-serif">{service.title}</h3>
               <p className="text-slate-600 text-base leading-relaxed mb-8">{service.desc}</p>
-              <Link to="/services" className="text-accent text-sm font-black uppercase tracking-widest flex items-center gap-2 hover:translate-x-2 transition-transform rtl:-scale-x-100 rtl:translate-x-0 rtl:hover:-translate-x-2">
+              <Link href="/services" className="text-accent text-sm font-black uppercase tracking-widest flex items-center gap-2 hover:translate-x-2 transition-transform rtl:-scale-x-100 rtl:translate-x-0 rtl:hover:-translate-x-2">
                  <span className="rtl:scale-x-100">{language === 'ar' ? 'اعرف المزيد' : 'Learn More'}</span> <ArrowRight size={16} className="rtl:rotate-180" />
               </Link>
             </div>
@@ -142,7 +144,7 @@ export default function Home() {
            <p className="text-slate-300 text-xl mb-12 max-w-2xl mx-auto relative z-10 leading-relaxed font-serif">
              {t('home.cta.subtitle')}
            </p>
-           <Link to="/contact" className="inline-block bg-accent text-white px-12 py-6 rounded-full font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-xl hover:scale-105 relative z-10">
+           <Link href="/contact" className="inline-block bg-accent text-white px-12 py-6 rounded-full font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-xl hover:scale-105 relative z-10">
              {t('home.cta.button')}
            </Link>
         </div>

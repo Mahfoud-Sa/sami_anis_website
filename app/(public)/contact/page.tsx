@@ -1,4 +1,6 @@
-import { useLanguage } from '../context/LanguageContext';
+'use client';
+
+import { useLanguage } from '../../../src/context/LanguageContext';
 import { Mail, Phone, MapPin, Send, Scale, Clock, Globe } from 'lucide-react';
 import { useState, FormEvent } from 'react';
 

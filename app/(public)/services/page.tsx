@@ -1,6 +1,8 @@
-import { useLanguage } from '../context/LanguageContext';
+'use client';
+
+import { useLanguage } from '../../../src/context/LanguageContext';
 import { Gavel, Scale, ShieldCheck, Briefcase, Home, UserCheck, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function Services() {
   const { language, t } = useLanguage();
@@ -66,7 +68,7 @@ export default function Services() {
                 {service.desc[language]}
               </p>
               <div className="pt-6 border-t border-slate-200 mt-auto">
-                <Link to="/contact" className="text-accent font-black uppercase tracking-widest text-xs flex items-center justify-between group-hover:text-amber-700 transition-colors">
+                <Link href="/contact" className="text-accent font-black uppercase tracking-widest text-xs flex items-center justify-between group-hover:text-amber-700 transition-colors">
                   {language === 'ar' ? 'طلب استشارة' : 'Book Consultation'}
                   <ArrowRight size={16} className="rtl:rotate-180" />
                 </Link>
