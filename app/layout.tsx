@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Providers } from '../src/providers';
-import '../src/index.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Sami Anis Law Firm | Justice & Excellence',
